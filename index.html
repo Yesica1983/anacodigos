@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>anacodigos | Dev & Datos</title>
+    <style>
+        :root {
+            --bg-color: #080c14;
+            --card-bg: #101625;
+            --card-border: #1e293b;
+            --neon-cyan: #00ffcc;
+            --neon-pink: #ff007f;
+            --neon-purple: #a855f7;
+            --youtube-red: #ff0000;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 15px;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 204, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 127, 0.05) 0%, transparent 20%);
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Cabecera Principal */
+        .header-card {
+            background: var(--card-bg);
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+            border-radius: 20px;
+            padding: 22px 18px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+        }
+
+        .avatar-glow {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 12px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+        }
+
+        .avatar-glow img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+
+        h1 {
+            color: var(--neon-cyan);
+            font-size: 1.7rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+        }
+
+        .tagline {
+            color: var(--text-sub);
+            font-size: 0.88rem;
+            line-height: 1.4;
+        }
+
+        /* Tarjeta Resumen */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+        }
+
+        .section-title {
+            color: var(--neon-pink);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .summary-text {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        /* Bloque Explicativo del Cafecito */
+        .cafecito-info {
+            background: rgba(255, 0, 127, 0.05);
+            border: 1px dashed var(--neon-pink);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        .cafecito-info p {
+            font-size: 0.83rem;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        /* Badges / Tecnologías */
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 0.78rem;
+            font-weight: 500;
+        }
+
+        .badge.highlight {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            background: rgba(0, 255, 204, 0.05);
+        }
+
+        .badge.pink {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+            background: rgba(255, 0, 127, 0.05);
+        }
+
+        /* Botones y Redes */
+        .btn-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-cafecito {
+            background: linear-gradient(135deg, var(--neon-pink), #d9006c);
+            color: #fff;
+            box-shadow: 0 0 12px rgba(255, 0, 127, 0.4);
+        }
+
+        .btn-cafecito:hover {
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.7);
+            transform: translateY(-2px);
+        }
+
+        /* Botón YouTube con Logo Rojo Oficial */
+        .btn-youtube {
+            background: rgba(255, 0, 0, 0.05);
+            border: 1px solid var(--youtube-red);
+            color: var(--text-main);
+        }
+
+        .btn-youtube:hover {
+            background: rgba(255, 0, 0, 0.15);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Botón TikTok */
+        .btn-tiktok {
+            background: transparent;
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+        }
+
+        .btn-tiktok:hover {
+            background: rgba(0, 255, 204, 0.1);
+            box-shadow: 0 0 12px rgba(0, 255, 204, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Botón Instagram */
+        .btn-instagram {
+            background: transparent;
+            border: 1px solid var(--neon-pink);
+            color: var(--neon-pink);
+        }
+
+        .btn-instagram:hover {
+            background: rgba(255, 0, 127, 0.1);
+            box-shadow: 0 0 12px rgba(255, 0, 127, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-share {
+            background: #1e293b;
+            color: var(--text-sub);
+            border: 1px solid var(--card-border);
+        }
+
+        .btn-share:hover {
+            color: var(--text-main);
+            background: #334155;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            margin-top: 5px;
+            padding-bottom: 15px;
+        }
+
+        footer span {
+            color: var(--neon-cyan);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        
+        <!-- CABECERA CON TU LOGO LOCAL -->
+        <div class="header-card">
+            <div class="avatar-glow">
+                <img src="img/logo.jpg" alt="Logo anacodigos">
+            </div>
+            <h1>anacodigos</h1>
+            <p class="tagline">Desarrolladora Full Stack & Analista de Datos autodidacta. Compartiendo tips prácticos, soluciones y guías de tecnología.</p>
+        </div>
+
+        <!-- PERFIL Y PROYECTOS -->
+        <div class="card">
+            <div class="section-title">⚡ Sobre Mí & Proyectos</div>
+            <p class="summary-text">
+                Desarrollo sitios y aplicaciones web combinando Frontend y Backend. Cuento con proyectos propios que abarcan desde APIs con Node.js y PostgreSQL hasta manipulación de datos en Java, Python y Power BI, controlados con Git & GitHub.
+            </p>
+            <div class="tech-grid">
+                <span class="badge highlight">HTML5 / CSS3</span>
+                <span class="badge highlight">JavaScript</span>
+                <span class="badge highlight">Node.js</span>
+                <span class="badge highlight">Express</span>
+                <span class="badge highlight">PostgreSQL</span>
+                <span class="badge pink">Python (Análisis)</span>
+                <span class="badge pink">Java</span>
+                <span class="badge pink">Power BI</span>
+                <span class="badge">Bootstrap</span>
+                <span class="badge">Tailwind</span>
+                <span class="badge">React</span>
+                <span class="badge">Angular</span>
+                <span class="badge">Git & GitHub</span>
+                <span class="badge">Accesibilidad UX</span>
+            </div>
+        </div>
+
+        <!-- BOTONES Y CAFÉ -->
+        <div class="btn-list">
+            
+            <!-- Mensaje y Botón de Cafecito -->
+            <div class="cafecito-info">
+                <p>💡 <strong>¿Por qué un cafecito?</strong><br>
+                Trabajo de forma independiente y creo contenido educativo de programación de manera totalmente gratuita. Si te sirven mis tips o querés apoyar mi trabajo para seguir impulsando esta comunidad, ¡un cafecito ayuda un montón!</p>
+            </div>
+
+            <a href="https://cafecito.app/anacodigos" target="_blank" class="btn btn-cafecito">
+                ☕ Invítame un Cafecito
+            </a>
+
+            <!-- Redes Sociales -->
+            <a href="https://www.tiktok.com/@programandoconana" target="_blank" class="btn btn-tiktok">
+                📱 TikTok: @anacodigos
+            </a>
+
+            <a href="https://www.instagram.com/anacodigos" target="_blank" class="btn btn-instagram">
+                📸 Instagram
+            </a>
+
+            <!-- Botón de YouTube con el logo rojo oficial integrado -->
+            <a href="https://www.youtube.com/@programandoconana" target="_blank" class="btn btn-youtube">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#ff0000" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                YouTube
+            </a>
+
+            <!-- Botón inteligente para compartir -->
+            <button class="btn btn-share" onclick="compartirWeb()">
+                🔗 Compartir anacodigos.netlify.app
+            </button>
+        </div>
+
+        <!-- FOOTER FIRMA -->
+        <footer>
+            Hecho por <span>anacodigos</span> 🚀
+        </footer>
+
+    </div>
+
+    <script>
+        function compartirWeb() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'anacodigos | Dev & Datos',
+                    text: '¡Mirá la landing page de anacodigos!',
+                    url: window.location.href,
+                }).catch(console.error);
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert("¡Enlace anacodigos.netlify.app copiado al portapapeles!");
+            }
+        }
+    </script>
+</body>
+</html>
