@@ -353,18 +353,22 @@
     </div>
 
     <script>
-        function compartirWeb() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'anacodigos | Dev & Datos',
-                    text: '¡Mirá la landing page de anacodigos!',
-                    url: window.location.href,
-                }).catch(console.error);
-            } else {
-                navigator.clipboard.writeText(window.location.href);
-                alert("¡Enlace anacodigos.netlify.app copiado al portapapeles!");
-            }
+    function compartirWeb() {
+        // Ponemos tu link acortado fijo
+        const urlParaCompartir = "https://tinyurl.com/anacodigos-web";
+
+        if (navigator.share) {
+            navigator.share({
+                title: 'anacodigos | Dev & Datos',
+                text: '¡Mirá la landing page de anacodigos!',
+                url: urlParaCompartir,
+            }).catch(console.error);
+        } else {
+            navigator.clipboard.writeText(urlParaCompartir);
+            alert("¡Enlace tinyurl.com/anacodigos-web copiado al portapapeles!");
         }
-    </script>
+    }
+ </script>
+
 </body>
 </html>
